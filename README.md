@@ -234,7 +234,6 @@ Convert capture to hashcat format
 **Crack with hashcat**
 
 ```bash
-   # Dictionary attack
    hashcat -m 22000 hashes.hc22000 wordlist.txt
 ```
 
