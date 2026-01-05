@@ -142,7 +142,8 @@ Remove iptables rules, disable IP forwarding bring down the at0 interface
 `nat-reset.sh`
 
 ```bash
-ifconfig at0 down echo 0 > /proc/sys/net/ipv4/ip_forward iptables -F iptables -t nat -F iptables -P FORWARD DROP
+ifconfig at0 down echo 0 > /proc/sys/net/ipv4/ip_forward
+iptables -F iptables -t nat -F iptables -P FORWARD DROP
 ```
 
 ### WPS pixie dust attacks
