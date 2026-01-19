@@ -1,6 +1,3 @@
-# Wifi Attack Workflow
-
-
 ### Wifi setup
 
 Change to a random MAC and enable monitor mode.
@@ -142,8 +139,7 @@ Remove iptables rules, disable IP forwarding bring down the at0 interface
 `nat-reset.sh`
 
 ```bash
-ifconfig at0 down echo 0 > /proc/sys/net/ipv4/ip_forward
-iptables -F iptables -t nat -F iptables -P FORWARD DROP
+ifconfig at0 down echo 0 > /proc/sys/net/ipv4/ip_forward iptables -F iptables -t nat -F iptables -P FORWARD DROP
 ```
 
 ### WPS pixie dust attacks
@@ -237,4 +233,3 @@ Convert capture to hashcat format
 ```bash
    hashcat -m 22000 hashes.hc22000 wordlist.txt
 ```
-
