@@ -22,7 +22,7 @@ Take note of Access Point name, MAC address, channel, and client MAC if applicab
 
 ### Set target
 
-Write target details to txt file for use with other scripts
+Write target details to txt file to use with other scripts
 
 `set-target.sh`
 
