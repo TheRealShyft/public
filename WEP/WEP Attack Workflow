@@ -1,0 +1,8 @@
+Set up capturing with ariodump-ng
+Authenticate with target AP (Fake Authentication)
+Generate traffic
+  - ARP Request Replay
+  - Interactive Packet Replay
+  - ChopChop
+  - Fragemntation
+Crack the password (PTW Attack)
