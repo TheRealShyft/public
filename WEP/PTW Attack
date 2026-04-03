@@ -1,0 +1,6 @@
+PTW Attack (Pyshkin-Tews-Weinmann)
+
+This is a statistical cryptanalysis method that dramatically reduces the number of IVs needed to crack WEP keys by exploiting
+correlations between the RC4 keystream and the WEP key, requiring as few as 20,000 IVs
+
+aircrack-ng -z capture.cap
