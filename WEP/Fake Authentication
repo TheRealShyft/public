@@ -1,0 +1,10 @@
+## Fake Authentication / MAC spoofing
+
+Fake Authentication is a technique where you associate with an access point using a spoofed MAC address to allow your wireless card to inject packets into the network.
+This is a replay attack which requires capturing a legitimate packet. First set up capturing (see Capturing section)
+
+Replay packet to associate with AP
+
+```bash
+aireplay-ng -1 0 -e $ap_name -a $ap_mac -h $local_mac wlan1mon
+```
