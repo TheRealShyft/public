@@ -1,0 +1,8 @@
+ARP Request Replay
+
+This is a packet injection technique that captures ARP request packets from the network and continuously replays them to the AP,
+forcing it to generate thousands of encrypted responses that contain IVs needed for WEP key cracking.
+
+Perform Fake Authentication first
+
+aireplay-ng -3 -b $ap_mac -h $local_mac wlan1mon
