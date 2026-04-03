@@ -1,0 +1,6 @@
+Interactive Packet Replay
+
+This allows you to manually capture, select, and replay specific packets from the network to generate traffic and collect IVs,
+giving you more control than automated attacks when the network has unusual traffic patterns.
+
+aireplay-ng -2 -b $ap_mac -h $local_mac wlan1mon
