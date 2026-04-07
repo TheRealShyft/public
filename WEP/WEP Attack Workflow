@@ -1,8 +1,30 @@
-Set up capturing with ariodump-ng
-Authenticate with target AP (Fake Authentication)
-Generate traffic
-  - ARP Request Replay
-  - Interactive Packet Replay
-  - ChopChop
-  - Fragemntation
-Crack the password (PTW Attack)
+Set a random MAC and enable monitor mode 
+
+setup.sh
+
+Scan for target
+
+scan.sh
+
+Set the target details and variables
+
+set-target.sh
+
+Start traffic capturing
+
+capture.sh
+
+Athenticate with target
+
+fake-auth.sh
+
+Generate traffic. Use these scripts in order until you see lots of traffic
+
+arp-reply.sh
+int-packet.sh
+chopchop.sh
+frag.sh
+
+Start cracking the password
+
+crack.sh
