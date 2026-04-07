@@ -4,3 +4,5 @@ This is a statistical cryptanalysis method that dramatically reduces the number 
 correlations between the RC4 keystream and the WEP key, requiring as few as 20,000 IVs
 
 aircrack-ng -z capture.cap
+
+crack.sh
