@@ -7,3 +7,5 @@ This is a replay attack which requires capturing a legitimate packet. First set 
 Replay packet to associate with AP
 
 aireplay-ng -1 0 -e $ap_name -a $ap_mac -h $local_mac $interface
+
+fake-auth.sh
