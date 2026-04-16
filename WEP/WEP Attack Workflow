@@ -20,7 +20,7 @@ fake-auth.sh
 
 Generate traffic. Use these scripts in order until you see lots of traffic
 
-arp-reply.sh
+arp-replay.sh
 int-packet.sh
 chopchop.sh
 frag.sh
