@@ -2,7 +2,7 @@ This can be used to crack WPA2 networks without waiting for a client to connect 
 
 Capture the PMKID and save to pcapng file
 
-hcxdumptool -i $interface$ -w pmkid.pcapng --rds=1 -c 6a
+hcxdumptool -i $interface -w pmkid.pcapng --rds=1 -c 6a
 
 Then convert the capture to hashcat format
 
