@@ -1,0 +1,5 @@
+As the EAP Server, EAPHammer acts as the endpoint of the TLS tunnel. It decrypts the incoming Phase 2 traffic.
+Since PAP does not involve hashing or challenge-responses (unlike MSCHAPv2), the plaintext testuser and testpass are
+exposed the moment the tunnel is stripped away.
+
+eaphammer --interface $interface --essid $ap_name --creds --hw-mode g --channel $channel
