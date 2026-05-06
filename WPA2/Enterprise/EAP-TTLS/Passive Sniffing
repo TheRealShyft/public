@@ -1,0 +1,5 @@
+Put Wi-Fi interface into monitor mode
+Run this command to see if the client send the username in plaintext
+This must be running before the handshake, deauth if need be
+
+tshark -i wlan1mon -f "ether proto 0x888e" -Y "eap.code == 2 && eap.type == 1" -T fields -e eap.identity
